@@ -4,13 +4,9 @@ ln -s ~/goinfre/.minikube ~/.minikube
 
 minikube start	--vm-driver=virtualbox  \
 				--cpus=2 --memory 2000 \
-                --no-vtx-check \
-                # check what above does
-                # --addons metalldb \
                 --addons dashboard
 
-# minikube addons enable metallb
-
+# install MetalLB by manifest
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
 
