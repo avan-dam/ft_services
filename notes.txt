@@ -7,8 +7,14 @@ https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deplo
 4. Change the docker pull image policy from always to if not available and make my own dockerfile for Nginx
 5. repeat process 3 and 4 for other services
 
+[kubectl get svc --all-namespaces]
+[kubectl get svc] -- only shows default
+GET METALLB UP AND RUNNING SO IT SHOWS UP WHEN RUNNING THE ABOVE COMMAND
 https://github.com/t0mm4rx/ft_services
 https://github.com/Tishj/ft_services
+
+[kubectl get all]
+[kubectl get nodes -o wide ]
 
 Introduction (will save you some time !)
 What are Docker and Kubernetes 🐳
@@ -88,6 +94,12 @@ MetricsServer: This will make sure metrics are collected abut or custer and can 
 [--extra-config=kubelet.authentication-token-webhook=true]
 This allows us to authenticate our request to the kubernetes API with the servce account's bearer token that's 
 placed into every container by default
+
+Display information about the Deployment:
+[kubectl describe deployment nginx-deployment]
+
+List the Pods created by the deployment:
+[kubectl get pods -l app=nginx]
 
 COMMANDS:
 Start minikube and create a cluster: 
