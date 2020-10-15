@@ -16,8 +16,12 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f srcs/metallb.yaml
 
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
-kubectl apply -f srcs/nginx/deployment.yaml
+kubectl apply -f srcs/nginx/nginx.yaml
 
+# Create a Deployment based on the of WORDPRESS based on generic YAML file: (https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
+kubectl apply -f srcs/wordpress/wordpress-mysql.yaml
+# and with SQL
+kubectl apply -f srcs/wordpress/wordpress.yaml
 
 # printf "Building and deploying nginx:\t\t"
 # docker build -t nginx_alpine ./srcs/nginx 
