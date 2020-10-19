@@ -8,7 +8,7 @@ type: Opaque
 stringData:
   MYSQL_DB_NAME: wordpress
   MYSQL_USER: root
-  MYSQL_PASSWORD: admin
+  password: admin
   MYSQL_DB_HOST: mysql-svc
   MYSQL_HOME: /etc/
 ---
@@ -61,12 +61,15 @@ spec:
       containers:
       - image: mysql:5.6
         name: mysql
+        # envFrom:
+        #   - secretRef:
+        #       name: mysql-secret
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_PASSWORD
+              key: password
         ports:
         - containerPort: 3306
           name: mysql

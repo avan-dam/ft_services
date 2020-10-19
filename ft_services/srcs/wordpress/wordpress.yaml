@@ -1,14 +1,14 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  labels:
-    app: wordpress
-  name: wordpress-secret
-type: Opaque
-stringData:
-  WP_USER: "wp"
-  WP_PASSWORD: "pass"
----
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   labels:
+#     app: wordpress
+#   name: wordpress-secret
+# type: Opaque
+# stringData:
+#   WP_USER: "wp"
+#   WP_PASSWORD: "pass"
+# ---
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,7 +17,7 @@ metadata:
     app: wordpress
 spec:
   ports:
-    - port: 5050
+    - port: 80
   selector:
     app: wordpress
     tier: frontend
@@ -64,10 +64,15 @@ spec:
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: wordpress-secret
-              key: WP_PASSWORD
+              name: mysql-secret
+              key: password
+        # envFrom:
+        #   - secretRef:
+        #       name: mysql-secret
+        #   - secretRef:
+        #       name: wordpress-secret
         ports:
-        - containerPort: 5050
+        - containerPort: 80
           name: wordpress
         volumeMounts:
         - name: wordpress-persistent-storage
