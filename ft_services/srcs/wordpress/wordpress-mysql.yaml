@@ -8,6 +8,7 @@ type: Opaque
 stringData:
   MYSQL_DB_NAME: wordpress
   MYSQL_USER: root
+  MYSQL_PASSWORD: password
   password: admin
   MYSQL_DB_HOST: mysql-svc
   MYSQL_HOME: /etc/

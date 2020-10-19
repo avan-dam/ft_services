@@ -22,6 +22,8 @@ kubectl apply -f srcs/nginx/nginx.yaml
 kubectl apply -f srcs/wordpress/wordpress-mysql.yaml
 # and with SQL
 kubectl apply -f srcs/wordpress/wordpress.yaml
+# and with phpmyadmin
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
 # printf "Building and deploying nginx:\t\t"
 # docker build -t nginx_alpine ./srcs/nginx 
