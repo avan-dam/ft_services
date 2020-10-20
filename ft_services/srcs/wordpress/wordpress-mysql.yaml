@@ -7,7 +7,7 @@ metadata:
 type: Opaque
 stringData:
   MYSQL_DB_NAME: wordpress
-  MYSQL_USER: root
+  MYSQL_USER: rooty
   MYSQL_PASSWORD: password
   password: admin
   MYSQL_DB_HOST: mysql-svc
@@ -15,7 +15,7 @@ stringData:
 ---
 apiVersion: v1
 kind: Service
-metadata:
+metadata:a
   name: wordpress-mysql
   labels:
     app: wordpress

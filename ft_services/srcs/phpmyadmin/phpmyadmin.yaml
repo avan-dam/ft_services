@@ -34,21 +34,21 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: PMA_PASSWORD
-              value: password
+            # - name: PMA_PASSWORD
+            #   value: password
+            # - name: MYSQL_ROOT_HOST
+            #   value: password
+            # - name: MYSQL_DATABASE
+            #   value: password
+            # - name: MYSQL_USER
+            #   value: password
+            - name: PMA_HOST
+              value: wordpress-mysql
             - name: MYSQL_ROOT_PASSWORD
-              value: password
-            - name: MYSQL_ROOT_HOST
-              value: password
-            - name: MYSQL_DATABASE
-              value: password
-            - name: MYSQL_USER
-              value: password
-            # - name: MYSQL_ROOT_PASSWORD
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: mysql-secret
-            #       key: password
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
     # spec:
     #   containers:
     #   - image: wordpress:4.8-apache
