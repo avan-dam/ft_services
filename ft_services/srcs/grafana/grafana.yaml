@@ -1,4 +1,14 @@
 apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: grafana
+  name: grafana-secret
+type: Opaque
+stringData:
+  password: kraken
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: grafana
@@ -46,7 +56,16 @@ spec:
         - name: grafana
           containerPort: 3000
         env:
+          - name: GF_INSTALL_PLUGINS
+            value: grafana-piechart-panel, blackmirror1-singlestat-math-panel
           - name: GF_SECURITY_ADMIN_USER
             value: admin
           - name: GF_SECURITY_ADMIN_PASSWORD
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: grafana-secret
+                key: password
+      volumes:
+      - name: grafana-volume
+        hostPath:
+          path: /grafana

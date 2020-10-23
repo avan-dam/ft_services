@@ -19,11 +19,17 @@ kubectl apply -f srcs/metallb.yaml
 kubectl apply -f srcs/nginx/nginx.yaml
 
 # Create a Deployment based on the of WORDPRESS based on generic YAML file: (https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
-kubectl apply -f srcs/wordpress/wordpress-mysql.yaml
+kubectl apply -f srcs/mysql/wordpress-mysql.yaml
 # and with SQL
 kubectl apply -f srcs/wordpress/wordpress.yaml
 # and with phpmyadmin
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
+# AND GRAFANA
+kubectl apply -f srcs/grafana/grafana.yaml   
+# AND influxdb
+kubectl apply -f srcs/influxdb/influxdb.yaml 
+# AND telegraf
+kubectl apply -f srcs/influxdb/telegraf.yaml 
 # and with FTPS
 # kubectl apply -f srcs/ftps/vsftpd.conf
 # kubectl apply -f srcs/ftps/ftps.yaml
