@@ -15,7 +15,7 @@ stringData:
 ---
 apiVersion: v1
 kind: Service
-metadata:a
+metadata:
   name: wordpress-mysql
   labels:
     app: wordpress

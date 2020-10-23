@@ -34,14 +34,6 @@ spec:
           ports:
             - containerPort: 80
           env:
-            # - name: PMA_PASSWORD
-            #   value: password
-            # - name: MYSQL_ROOT_HOST
-            #   value: password
-            # - name: MYSQL_DATABASE
-            #   value: password
-            # - name: MYSQL_USER
-            #   value: password
             - name: PMA_HOST
               value: wordpress-mysql
             - name: MYSQL_ROOT_PASSWORD
@@ -49,64 +41,3 @@ spec:
                 secretKeyRef:
                   name: mysql-secret
                   key: password
-    # spec:
-    #   containers:
-    #   - image: wordpress:4.8-apache
-    #     name: wordpress
-    #     env:
-    #     - name: WORDPRESS_DB_HOST
-    #       value: wordpress-mysql
-    #     - name: WORDPRESS_DB_PASSWORD
-    #       valueFrom:
-    #         secretKeyRef:
-    #           name: mysql-secret
-    #           key: password
-      #   ports:
-      #   - containerPort: 80
-      #     name: wordpress
-      #   volumeMounts:
-      #   - name: wordpress-persistent-storage
-      #     mountPath: /var/www/html
-      # volumes:
-      # - name: wordpress-persistent-storage
-      #   persistentVolumeClaim:
-      #     claimName: wp-pv-claim
-
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: phpmyadmin-service
-#   spec:
-#     type: NodePort
-#     selector:
-#       app: phpmyadmin
-#     ports:
-#     - name: http
-#       port: 80
-#       targetPort: 80
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#     name: phpmyadmin-deployment
-#   spec:
-#     # selector:
-#     #     matchLabels:
-#     #         app: phpmyadmin
-#     # template:
-#     #     metadata:
-#     #         labels:
-#     #             app: phpmyadmin
-#       # spec: 
-#       #   containers:
-#       #       - name: phpmyadmin
-#       #           image: phpmyadmin/phpmyadmin
-#                 # env:
-#                 # - name: PMA_HOSTS
-#                 #   value: 10.16.0.3, 10.16.0.5
-#                 #  - name: PMA_VERBOSES
-#                 #   value: dev-db, prod-db
-#             # valueFrom:
-#             #    secretKeyRef:
-#             #      name: mysql-secret
-#             #     key: password
