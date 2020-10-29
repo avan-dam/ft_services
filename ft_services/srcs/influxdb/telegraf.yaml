@@ -5,8 +5,23 @@ metadata:
   name: telegraf-config
 data:
   telegraf.conf: |+
+    [[inputs.docker]]
+      endpoint = "unix:///var/run/docker.sock"
+  
+      gather_services = false
+
+      container_names = []
+
+      timeout = "20s"
+
+      docker_label_include = []
+      docker_label_exclude = []
+
+      perdevice = true
+
+      total = false
     # [[inputs.docker]]
-      # endpoint = "unix:///var/run/docker.sock"
+    #   endpoint = "unix:///var/run/docker.sock"
     # Telegraf Configuration
     #
     # Telegraf is entirely plugin driven. All metrics are gathered from the
@@ -23,160 +38,167 @@ data:
     # for numbers and booleans they should be plain (ie, $INT_VAR, $BOOL_VAR)
 
 
-    # Global tags can be specified here in key="value" format.
-    [global_tags]
+    # # Global tags can be specified here in key="value" format.
+    # [global_tags]
 
-    # Configuration for telegraf agent
-    [agent]
-      ## Default data collection interval for all inputs
-      interval = "10s"
-      ## Rounds collection interval to 'interval'
-      ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
-      round_interval = true
+    # # Configuration for telegraf agent
+    # [agent]
+    #   ## Default data collection interval for all inputs
+    #   interval = "10s"
+    #   ## Rounds collection interval to 'interval'
+    #   ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
+    #   round_interval = true
 
-      ## Telegraf will send metrics to outputs in batches of at most
-      ## metric_batch_size metrics.
-      ## This controls the size of writes that Telegraf sends to output plugins.
-      metric_batch_size = 1000
+    #   ## Telegraf will send metrics to outputs in batches of at most
+    #   ## metric_batch_size metrics.
+    #   ## This controls the size of writes that Telegraf sends to output plugins.
+    #   metric_batch_size = 1000
 
-      ## For failed writes, telegraf will cache metric_buffer_limit metrics for each
-      ## output, and will flush this buffer on a successful write. Oldest metrics
-      ## are dropped first when this buffer fills.
-      ## This buffer only fills when writes fail to output plugin(s).
-      metric_buffer_limit = 10000
+    #   ## For failed writes, telegraf will cache metric_buffer_limit metrics for each
+    #   ## output, and will flush this buffer on a successful write. Oldest metrics
+    #   ## are dropped first when this buffer fills.
+    #   ## This buffer only fills when writes fail to output plugin(s).
+    #   metric_buffer_limit = 10000
 
-      ## Collection jitter is used to jitter the collection by a random amount.
-      ## Each plugin will sleep for a random time within jitter before collecting.
-      ## This can be used to avoid many plugins querying things like sysfs at the
-      ## same time, which can have a measurable effect on the system.
-      collection_jitter = "0s"
+    #   ## Collection jitter is used to jitter the collection by a random amount.
+    #   ## Each plugin will sleep for a random time within jitter before collecting.
+    #   ## This can be used to avoid many plugins querying things like sysfs at the
+    #   ## same time, which can have a measurable effect on the system.
+    #   collection_jitter = "0s"
 
-      ## Default flushing interval for all outputs. Maximum flush_interval will be
-      ## flush_interval + flush_jitter
-      flush_interval = "10s"
-      ## Jitter the flush interval by a random amount. This is primarily to avoid
-      ## large write spikes for users running a large number of telegraf instances.
-      ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
-      flush_jitter = "0s"
+    #   ## Default flushing interval for all outputs. Maximum flush_interval will be
+    #   ## flush_interval + flush_jitter
+    #   flush_interval = "10s"
+    #   ## Jitter the flush interval by a random amount. This is primarily to avoid
+    #   ## large write spikes for users running a large number of telegraf instances.
+    #   ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
+    #   flush_jitter = "0s"
 
-      ## By default or when set to "0s", precision will be set to the same
-      ## timestamp order as the collection interval, with the maximum being 1s.
-      ##   ie, when interval = "10s", precision will be "1s"
-      ##       when interval = "250ms", precision will be "1ms"
-      ## Precision will NOT be used for service inputs. It is up to each individual
-      ## service input to set the timestamp at the appropriate precision.
-      ## Valid time units are "ns", "us" (or "µs"), "ms", "s".
-      precision = ""
+    #   ## By default or when set to "0s", precision will be set to the same
+    #   ## timestamp order as the collection interval, with the maximum being 1s.
+    #   ##   ie, when interval = "10s", precision will be "1s"
+    #   ##       when interval = "250ms", precision will be "1ms"
+    #   ## Precision will NOT be used for service inputs. It is up to each individual
+    #   ## service input to set the timestamp at the appropriate precision.
+    #   ## Valid time units are "ns", "us" (or "µs"), "ms", "s".
+    #   precision = ""
 
-      ## Logging configuration:
-      ## Run telegraf with debug log messages.
-      debug = false
-      ## Run telegraf in quiet mode (error log messages only).
-      quiet = false
-      ## Specify the log file name. The empty string means to log to stderr.
-      logfile = ""
+    #   ## Logging configuration:
+    #   ## Run telegraf with debug log messages.
+    #   debug = false
+    #   ## Run telegraf in quiet mode (error log messages only).
+    #   quiet = false
+    #   ## Specify the log file name. The empty string means to log to stderr.
+    #   logfile = ""
 
-      ## Override default hostname, if empty use os.Hostname()
-      hostname = ""
-      ## If set to true, do no set the "host" tag in the telegraf agent.
-      omit_hostname = true
+    #   ## Override default hostname, if empty use os.Hostname()
+    #   hostname = ""
+    #   ## If set to true, do no set the "host" tag in the telegraf agent.
+    #   omit_hostname = true
 
 
     ###############################################################################
     #                            OUTPUT PLUGINS                                   #
     ###############################################################################
-    # Configuration for sending metrics to InfluxDB
-    [[outputs.influxdb]]
-      ## The full HTTP or UDP URL for your InfluxDB instance.
-      ##
-      ## Multiple URLs can be specified for a single cluster, only ONE of the
-      ## urls will be written to each interval.
-      # urls = ["unix:///var/run/influxdb.sock"]
-      # urls = ["udp://127.0.0.1:8089"]
-      # urls = ["http://127.0.0.1:8086"]
-      urls = ["$INFLUXDB_URL"]
+      # Output Plugin InfluxDB
+      [[outputs.influxdb]]
+        urls = ["$INFLUXDB_URL"]
+        skip_database_creation = false
+        database = "$INFLUXDB_DB"
+        username = "$INFLUXDB_USER"
+        password = "$INFLUXDB_USER_PASSWORD"
+    # # Configuration for sending metrics to InfluxDB
+    # [[outputs.influxdb]]
+    #   ## The full HTTP or UDP URL for your InfluxDB instance.
+    #   ##
+    #   ## Multiple URLs can be specified for a single cluster, only ONE of the
+    #   ## urls will be written to each interval.
+    #   # urls = ["unix:///var/run/influxdb.sock"]
+    #   # urls = ["udp://127.0.0.1:8089"]
+    #   # urls = ["http://127.0.0.1:8086"]
+    #   urls = ["$INFLUXDB_URL"]
 
-      ## The target database for metrics; will be created as needed.
-      database = "$INFLUXDB_DB"
+    #   ## The target database for metrics; will be created as needed.
+    #   database = "$INFLUXDB_DB"
 
-      ## If true, no CREATE DATABASE queries will be sent.  Set to true when using
-      ## Telegraf with a user without permissions to create databases or when the
-      ## database already exists.
-      # skip_database_creation = false
+    #   ## If true, no CREATE DATABASE queries will be sent.  Set to true when using
+    #   ## Telegraf with a user without permissions to create databases or when the
+    #   ## database already exists.
+    #   # skip_database_creation = false
 
-      ## Name of existing retention policy to write to.  Empty string writes to
-      ## the default retention policy.  Only takes effect when using HTTP.
-      # retention_policy = ""
+    #   ## Name of existing retention policy to write to.  Empty string writes to
+    #   ## the default retention policy.  Only takes effect when using HTTP.
+    #   # retention_policy = ""
 
-      ## Write consistency (clusters only), can be: "any", "one", "quorum", "all".
-      ## Only takes effect when using HTTP.
-      # write_consistency = "any"
+    #   ## Write consistency (clusters only), can be: "any", "one", "quorum", "all".
+    #   ## Only takes effect when using HTTP.
+    #   # write_consistency = "any"
 
-      ## Timeout for HTTP messages.
-      # timeout = "5s"
+    #   ## Timeout for HTTP messages.
+    #   # timeout = "5s"
 
-      ## HTTP Basic Auth
-      username = "$INFLUXDB_USER"
-      password = "$INFLUXDB_USER_PASSWORD"
+    #   ## HTTP Basic Auth
+    #   username = "$INFLUXDB_USER"
+    #   password = "$INFLUXDB_USER_PASSWORD"
 
-      ## HTTP User-Agent
-      # user_agent = "telegraf"
+    #   ## HTTP User-Agent
+    #   # user_agent = "telegraf"
 
-      ## UDP payload size is the maximum packet size to send.
-      # udp_payload = 512
+    #   ## UDP payload size is the maximum packet size to send.
+    #   # udp_payload = 512
 
-      ## Optional TLS Config for use on HTTP connections.
-      # tls_ca = "/etc/telegraf/ca.pem"
-      # tls_cert = "/etc/telegraf/cert.pem"
-      # tls_key = "/etc/telegraf/key.pem"
-      ## Use TLS but skip chain & host verification
-      # insecure_skip_verify = false
+    #   ## Optional TLS Config for use on HTTP connections.
+    #   # tls_ca = "/etc/telegraf/ca.pem"
+    #   # tls_cert = "/etc/telegraf/cert.pem"
+    #   # tls_key = "/etc/telegraf/key.pem"
+    #   ## Use TLS but skip chain & host verification
+    #   # insecure_skip_verify = false
 
-      ## HTTP Proxy override, if unset values the standard proxy environment
-      ## variables are consulted to determine which proxy, if any, should be used.
-      # http_proxy = "http://corporate.proxy:3128"
+    #   ## HTTP Proxy override, if unset values the standard proxy environment
+    #   ## variables are consulted to determine which proxy, if any, should be used.
+    #   # http_proxy = "http://corporate.proxy:3128"
 
-      ## Additional HTTP headers
-      # http_headers = {"X-Special-Header" = "Special-Value"}
+    #   ## Additional HTTP headers
+    #   # http_headers = {"X-Special-Header" = "Special-Value"}
 
-      ## HTTP Content-Encoding for write request body, can be set to "gzip" to
-      ## compress body or "identity" to apply no encoding.
-      # content_encoding = "identity"
+    #   ## HTTP Content-Encoding for write request body, can be set to "gzip" to
+    #   ## compress body or "identity" to apply no encoding.
+    #   # content_encoding = "identity"
 
-      ## When true, Telegraf will output unsigned integers as unsigned values,
-      ## i.e.: "42u".  You will need a version of InfluxDB supporting unsigned
-      ## integer values.  Enabling this option will result in field type errors if
-      ## existing data has been written.
-      # influx_uint_support = false
+    #   ## When true, Telegraf will output unsigned integers as unsigned values,
+    #   ## i.e.: "42u".  You will need a version of InfluxDB supporting unsigned
+    #   ## integer values.  Enabling this option will result in field type errors if
+    #   ## existing data has been written.
+    #   # influx_uint_support = false
 
     ###############################################################################
     #                            INPUT PLUGINS                                    #
     ###############################################################################
 
-    # Read metrics about cpu usage
-    [[inputs.cpu]]
-      ## Whether to report per-cpu stats or not
-      percpu = true
-      ## Whether to report total system cpu stats or not
-      totalcpu = true
-      ## If true, collect raw CPU time metrics.
-      collect_cpu_time = false
-      ## If true, compute and report the sum of all non-idle CPU states.
-      report_active = false
+    # # Read metrics about cpu usage
+    # [[inputs.cpu]]
+    #   ## Whether to report per-cpu stats or not
+    #   percpu = true
+    #   ## Whether to report total system cpu stats or not
+    #   totalcpu = true
+    #   ## If true, collect raw CPU time metrics.
+    #   collect_cpu_time = false
+    #   ## If true, compute and report the sum of all non-idle CPU states.
+    #   report_active = false
 
 
-    # Read metrics about disk usage by mount point
-    [[inputs.disk]]
-      ## By default stats will be gathered for all mount points.
-      ## Set mount_points will restrict the stats to only the specified mount points.
-      # mount_points = ["/"]
+    # # Read metrics about disk usage by mount point
+    # [[inputs.disk]]
+    #   ## By default stats will be gathered for all mount points.
+    #   ## Set mount_points will restrict the stats to only the specified mount points.
+    #   # mount_points = ["/"]
 
-      ## Ignore mount points by filesystem type.
-      ignore_fs = ["tmpfs", "devtmpfs", "devfs", "overlay", "aufs", "squashfs"]
+    #   ## Ignore mount points by filesystem type.
+    #   ignore_fs = ["tmpfs", "devtmpfs", "devfs", "overlay", "aufs", "squashfs"]
 
 
-    # Read metrics about disk IO by device
-    [[inputs.diskio]]
+    # # Read metrics about disk IO by device
+    # [[inputs.diskio]]
       ## By default, telegraf will gather stats for all devices including
       ## disk partitions.
       ## Setting devices will restrict the stats to the specified devices.
@@ -201,36 +223,36 @@ data:
       ## the near-meaningless DM-0 name.
       # name_templates = ["$ID_FS_LABEL","$DM_VG_NAME/$DM_LV_NAME"]
 
-    # Get kernel statistics from /proc/stat
-    [[inputs.kernel]]
-      # no configuration
+    # # Get kernel statistics from /proc/stat
+    # [[inputs.kernel]]
+    #   # no configuration
 
 
-    # Read metrics about memory usage
-    [[inputs.mem]]
-      # no configuration
+    # # Read metrics about memory usage
+    # [[inputs.mem]]
+    #   # no configuration
 
 
-    # Get the number of processes and group them by status
-    [[inputs.processes]]
-      # no configuration
+    # # Get the number of processes and group them by status
+    # [[inputs.processes]]
+    #   # no configuration
 
 
-    # Read metrics about swap memory usage
-    [[inputs.swap]]
-      # no configuration
+    # # Read metrics about swap memory usage
+    # [[inputs.swap]]
+    #   # no configuration
 
 
-    # Read metrics about system load & uptime
-    [[inputs.system]]
-      # no configuration
+    # # Read metrics about system load & uptime
+    # [[inputs.system]]
+    #   # no configuration
 
-    # Collect TCP connections state and UDP socket counts
-    [[inputs.netstat]]
-      # no configuration
+    # # Collect TCP connections state and UDP socket counts
+    # [[inputs.netstat]]
+    #   # no configuration
 
-    # Gather metrics about network interfaces
-    [[inputs.net]]
+    # # Gather metrics about network interfaces
+    # [[inputs.net]]
       ## By default, telegraf gathers stats from any up interface (excluding loopback)
       ## Setting interfaces will tell it to gather these explicit interfaces,
       ## regardless of status. When specifying an interface, glob-style
@@ -250,10 +272,10 @@ metadata:
   name: telegraf-secrets
 type: Opaque
 stringData:
-  INFLUXDB_DB: telegraf
-  INFLUXDB_URL: http://influxdb-service:8086
+  INFLUXDB_DB: influxdb-database
+  INFLUXDB_URL: http://influxdb:8086
   INFLUXDB_USER: admin
-  INFLUXDB_USER_PASSWORD: kraken
+  INFLUXDB_USER_PASSWORD: amber
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -273,13 +295,12 @@ spec:
         - image: telegraf:1.10.0
           name: telegraf
           volumeMounts:
-            # - name: docker-socket
-                # mountPath: /var/run/docker.sock
+            - mountPath: /var/run/docker.sock
+              name: docker-socket
             - mountPath: /etc/telegraf/telegraf.conf
               name: telegraf-config
               subPath: telegraf.conf
               readOnly: true
-
           envFrom:
             - secretRef:
                 name: telegraf-secrets
@@ -287,6 +308,22 @@ spec:
         - name: telegraf-config
           configMap:
             name: telegraf-config
-        # - name: docker-socket
-          # hostPath:
-          # path: /var/run/docker.sock
+        - name: docker-socket
+          hostPath:
+            path: /var/run/docker.sock
+
+
+    #   # volumes:
+    #   #   # - /var/run/docker.sock:/var/run/docker.sock
+    #   #   - /data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
+    #   # # labels:
+    #   # #   - "traefik.enable=false"
+    #   # configMap:
+    #   #   name: telegraf-config
+    #   volumes:
+    #     - name: telegraf-config
+    #       configMap:
+    #         name: telegraf-config
+    #     # - name: docker-socket
+    #       # hostPath:
+    #       # path: /var/run/docker.sock

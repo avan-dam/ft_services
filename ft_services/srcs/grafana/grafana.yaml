@@ -6,7 +6,7 @@ metadata:
   name: grafana-secret
 type: Opaque
 stringData:
-  password: kraken
+  password: amber
 ---
 apiVersion: v1
 kind: Service
@@ -52,6 +52,9 @@ spec:
       containers:
       - name: grafana
         image: grafana/grafana:latest
+        volumeMounts:
+          - mountPath: /data/grafana
+            name: grafanaa
         ports:
         - name: grafana
           containerPort: 3000
@@ -65,7 +68,24 @@ spec:
               secretKeyRef:
                 name: grafana-secret
                 key: password
+        # volumeMounts:
+        #   - mountPath: /var/lib/grafana/dashboards/mysql-dashboard.json
+        #     name: grafana-config-volume
+        #     readOnly: true
+        #     subPath: mysql-dashboard.json
       volumes:
+      # - /data/grafana:/var/lib/grafana
       - name: grafana-volume
         hostPath:
           path: /grafana
+      - name: grafanaa
+        hostPath:
+          path: /var/lib/grafana
+      # - name: grafana-config-volume
+      #   configMap:
+      #     name: grafana-config
+# to load up in grafana 
+# HTTP URL : http://influxdb:8086
+# DATABASE : influxdb-database
+# USER : admin 
+# PASSWORD : amber

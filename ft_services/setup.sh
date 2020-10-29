@@ -3,7 +3,7 @@ mkdir -p ~/goinfre/.minikube
 ln -s ~/goinfre/.minikube ~/.minikube
 
 minikube start	--vm-driver=virtualbox  \
-				--cpus=2 --memory 2000 \
+				--cpus=2 --memory 2500 \
                 --addons dashboard
 
 # install MetalLB by manifest
