@@ -1,0 +1,103 @@
+body {
+  font-family: arial;
+  font-size: 18;
+  margin-bottom: 10%;
+  margin-top: 0%;
+  margin-right: 0%;
+  margin-left: 0%;
+  color: cornflowerblue;
+  text-align: justify;
+}
+
+table {
+  width: 100%;
+  background-color: lightcyan;
+  text-align: center;
+  align-items: center;
+  border-collapse: collapse;
+}
+table a {
+  text-decoration: none;
+}
+table th, table td {
+  padding: 20px;
+  text-align: center;
+}
+table a {
+  color: darkblue;
+}
+table th {
+  width: 30%;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 100%;
+  align-items: center;
+  display: center;
+  flex-wrap: wrap;
+}
+
+h1 {
+  font-size: 24;
+  text-align: left;
+  color: darkblue;
+  margin: 5%;
+  padding-top: 20px;
+}
+
+h2, h3 {
+  color: darkblue;
+  margin: 5%;
+  padding-top: 20px;
+}
+
+th:hover {
+  font-weight: 100;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.col-lg-3 :hover .middletext {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.col-sm-6 :hover .middletext {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.col-sm-12 :hover .middletext {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.col-lg-12 :hover .middletext {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+p {
+  padding: 5%;
+}
+
+.row p {
+  text-align: center;
+}
+
+/*# sourceMappingURL=alpaca.css.map */

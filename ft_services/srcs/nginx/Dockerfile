@@ -10,7 +10,7 @@ RUN chown -R www:www /www
 # RUN chown -R www:www /etc/nginx/nginx.conf
 # RUN rm -rf /etc/nginx/nginx.conf
 COPY ./srcs/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./srcs/index.html /var/www/localhost/htdocs/
+COPY ./srcs/homepage/* /var/www/localhost/htdocs/
 # RUN vi /etc/nginx/nginx.conf
 # RUN ln -s /etc/nginx/sites-available/amber /etc/nginx/sites-enabled/amber
 # copy in certificates
