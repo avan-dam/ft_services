@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: nginx
   labels:
-    run: nginx
+    run: mynginx
 spec:
   ports:
   - port: 80
@@ -30,8 +30,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.14.2
-        # image pull policy - disable build your own
-        #  imgae: nginx_amber image pull policy off/never bleh
+        image: mynginx
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
+        - containerPort: 443

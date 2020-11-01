@@ -3,7 +3,7 @@ mkdir -p ~/goinfre/.minikube
 ln -s ~/goinfre/.minikube ~/.minikube
 
 minikube start	--vm-driver=virtualbox  \
-				--cpus=2 --memory 2500 \
+				--cpus=2 --memory 2000 \
                 --addons dashboard
 
 # install MetalLB by manifest
@@ -14,7 +14,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 # MetalLB remains idle until configured. This is accomplished by creating and deploying a configmap
 kubectl apply -f srcs/metallb.yaml
-
+eval $(minikube docker-env)
+docker build -t mynginx srcs/nginx/  
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 kubectl apply -f srcs/nginx/nginx.yaml
 
