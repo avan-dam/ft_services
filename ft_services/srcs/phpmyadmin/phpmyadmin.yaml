@@ -29,15 +29,35 @@ spec:
         app: phpmyadmin
     spec:
       containers:
-        - name: phpmyadmin
-          image: phpmyadmin/phpmyadmin:4.7.9-1
+        - image: my_phpmyadmin
+          name: phpmyadmin
+          imagePullPolicy: Never
           ports:
             - containerPort: 80
           env:
-            - name: PMA_HOST
+            # - name: PMA_HOST
+            #   value: mysql
+            - name: DB_NAME
+              value: wordpress
+            - name: DB_USER
+              value: rooty
+            - name: DB_PASS
+              value: password
+            - name: DB_HOST
               value: mysql
+            # - name: DB_USER
+            #   value: rooty
+            # - name: DB_PASS
+            #   value: password
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
+              value: admin
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+        # - name: DB_HOST
+        #   value: mysql
+        # - name: DB_NAME
+        #   value: wordpress
+        # - name: DB_USER
+        #   value: root
+        # - name: DB_PASS
+        #   value: password

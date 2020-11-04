@@ -19,7 +19,8 @@ kubectl delete deployment mysql
 kubectl delete service mysql
 kubectl delete deployment wordpress
 kubectl delete service wordpress
-
+kubectl delete deployment phpmyadmin
+kubectl delete service phpmyadmin
 docker build -t my_mysql srcs/mysql/  
 # docker build -t myphp srcs/phpmyadmin/
 # docker build -t mysql srcs/mysql/
@@ -28,7 +29,7 @@ docker build -t my_mysql srcs/mysql/
 # The deployments
 kubectl apply -f srcs/mysql/mysql.yaml
 # kubectl apply -f srcs/mysql/mysql.yaml
-# kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 kubectl apply -f srcs/wordpress/wordpress.yaml
 
 # kubectl apply -f srcs/ftps.yaml

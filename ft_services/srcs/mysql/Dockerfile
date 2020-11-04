@@ -7,8 +7,6 @@ RUN chmod +x /tmp/startup.sh
 COPY srcs/my.cnf /etc/
 VOLUME /var/lib/mysql
 
-CMD ./tmp/startup.sh
-
 ENTRYPOINT ["/bin/sh", "/tmp/startup.sh"]
 
 
