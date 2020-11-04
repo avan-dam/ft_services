@@ -1,15 +1,36 @@
-FROM 	alpine
+FROM alpine
 
-RUN 	apk add mysql mysql-client && \
-    	rm -f /var/cache/apk/* 
-COPY    srcs/startup.sh /tmp/startup.sh
-RUN     chmod +x /tmp/startup.sh
-COPY	srcs/my.cnf /etc/
+RUN	apk add mysql mysql-client
 
-VOLUME  /var/lib/mysql
-# EXPOSE  3306
+COPY srcs/startup.sh /tmp/startup.sh
+RUN chmod +x /tmp/startup.sh
+COPY srcs/my.cnf /etc/
+VOLUME /var/lib/mysql
 
-CMD     sh /tmp/startup.sh
+CMD ./tmp/startup.sh
+
+ENTRYPOINT ["/bin/sh", "/tmp/startup.sh"]
+
+
+
+# FROM    alpine:latest
+# RUN	   	apk update && \
+# 		apk upgrade --available && \
+# 		apk add mysql mysql-client && \
+#     	rm -f /var/cache/apk/* 
+# COPY    srcs/startup.sh /tmp/startup.sh
+# RUN     chmod +x /tmp/startup.sh
+# COPY	srcs/my.cnf /etc/
+
+# VOLUME  /var/lib/mysql
+# # EXPOSE  3306
+# ENTRYPOINT ["/bin/sh", "/tmp/startup.sh"]
+
+
+
+
+
+# CMD     sh /tmp/startup.sh
 # ENTRYPOINT ["sh /tmp/startup.sh"]
 # environment set up
 # ENV 	MYSQL_ROOT_PASSWORD="admin"

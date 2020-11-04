@@ -60,10 +60,10 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: my_mysql
+      - image: mysql:latest
         name: mysql
         # or the otherway around aboce
-        imagePullPolicy: Never
+        # imagePullPolicy: Never
         envFrom:
           - secretRef:
               name: mysql-secret

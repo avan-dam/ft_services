@@ -1,3 +1,4 @@
+#!/bin/bash
 rm -rf ~/.minikube
 mkdir -p ~/goinfre/.minikube
 ln -s ~/goinfre/.minikube ~/.minikube
