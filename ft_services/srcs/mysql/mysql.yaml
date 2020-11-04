@@ -16,7 +16,7 @@ stringData:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-mysql
+  name: mysql
   labels:
     app: wordpress
 spec:
@@ -43,7 +43,7 @@ spec:
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: wordpress-mysql
+  name: mysql
   labels:
     app: wordpress
 spec:
@@ -60,11 +60,13 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: mysql:5.6
+      - image: my_mysql
         name: mysql
-        # envFrom:
-        #   - secretRef:
-        #       name: mysql-secret
+        # or the otherway around aboce
+        imagePullPolicy: Never
+        envFrom:
+          - secretRef:
+              name: mysql-secret
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
