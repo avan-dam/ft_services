@@ -17,20 +17,19 @@
 docker system prune -a -f
 kubectl delete deployment mysql
 kubectl delete service mysql
-kubectl delete deployment wordpress
-kubectl delete service wordpress
-kubectl delete deployment phpmyadmin
-kubectl delete service phpmyadmin
+# kubectl delete deployment wordpress
+# kubectl delete service wordpress
+# kubectl delete deployment phpmyadmin
+# kubectl delete service phpmyadmin
 docker build -t my_mysql srcs/mysql/  
-# docker build -t myphp srcs/phpmyadmin/
+# docker build -t my_phpmyadmin srcs/phpmyadmin/
 # docker build -t mysql srcs/mysql/
 # docker build -t mywordpress srcs/wordpress/
 
 # The deployments
 kubectl apply -f srcs/mysql/mysql.yaml
-# kubectl apply -f srcs/mysql/mysql.yaml
-kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
-kubectl apply -f srcs/wordpress/wordpress.yaml
+# kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
+# kubectl apply -f srcs/wordpress/wordpress.yaml
 
 # kubectl apply -f srcs/ftps.yaml
 # kubectl apply -f srcs/grafana.yaml

@@ -2,7 +2,7 @@
 echo "wtf"
 
 mysql_install_db --user=mysql --ldata=/var/lib/mysql
-
+# mysql_upgrade --user=mysql --ldata=/var/lib/mysql
 echo "noice"
 
 :> /tmp/sql
@@ -17,12 +17,13 @@ echo "FLUSH PRIVILEGES;" >> /tmp/sql
 
 cat /tmp/sql
 echo "done printing /tmp/sql"
-
+echo "YAS QUEEN i iz hLLLLe"
+# /usr/bin/mysql_install_db --user=rooty
 # /usr/bin/mysql_install_db --user=mysql
 
 /usr/bin/mysqld --console --init_file=/tmp/sql
 # mysql_install_db --user=mysql --ldata=/var/lib/mysql
-
+# mysql_upgrade_db --user=rooty --ldata=/var/lib/mysql
 # # :> /tmp/sql
 # # # allow external connections
 # # echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;" >> /tmp/sql
