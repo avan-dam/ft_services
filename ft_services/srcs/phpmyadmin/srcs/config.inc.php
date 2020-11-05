@@ -21,6 +21,7 @@ $i = 0;
 $i++;
 /* Authentication type */
 $cfg['Servers'][$i]['auth_type'] = 'cookie';
+$cfg['tempDir'] = 'tmp';
 /* Server parameters */
 $cfg['Servers'][$i]['user'] = 'mysql';
 $cfg['Servers'][$i]['password'] = 'password';
@@ -65,7 +66,6 @@ $cfg['Servers'][$i]['AllowNoPassword'] = true;
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
-// $cfg['tempDir'] = '/tmp';
 
 /**
  * Whether to display icons or text or both icons and text in table row

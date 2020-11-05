@@ -1,7 +1,7 @@
 FROM    alpine
 
 RUN     apk add mysql mysql-client
-# RUN     rm -f /var/cache/apk/*
+RUN     rm -f /var/cache/apk/*
 
 
 COPY    srcs/startup.sh /tmp/startup.sh
