@@ -1,14 +1,11 @@
 #!/bin/sh
-echo "wtf"
 
 mysql_install_db --user=mysql --ldata=/var/lib/mysql
 # mysql_upgrade --user=mysql --ldata=/var/lib/mysql
-echo "noice"
 
 :> /tmp/sql
 
 echo "CREATE DATABASE IF NOT EXISTS $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;" >> /tmp/sql
-echo "one line done..."
 echo "SET PASSWORD FOR '$DB_USER'@'localhost'=PASSWORD('${DB_PASS}') ;" >> /tmp/sql
 echo "GRANT ALL ON *.* TO '$DB_USER'@'127.0.0.1' IDENTIFIED BY '$DB_PASS' WITH GRANT OPTION;" >> /tmp/sql
 echo "GRANT ALL ON *.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS' WITH GRANT OPTION;" >> /tmp/sql
@@ -16,8 +13,7 @@ echo "GRANT ALL ON *.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS' WITH GRANT OPT
 echo "FLUSH PRIVILEGES;" >> /tmp/sql
 
 cat /tmp/sql
-echo "done printing /tmp/sql"
-echo "YAS QUEEN i iz hLLLLe"
+# echo "done printing /tmp/sql"
 # /usr/bin/mysql_install_db --user=rooty
 # /usr/bin/mysql_install_db --user=mysql
 
