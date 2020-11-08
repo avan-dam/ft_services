@@ -17,7 +17,7 @@ metadata:
     app: wordpress
 spec:
   ports:
-    - port: 80
+    - port: 5050
   selector:
     app: wordpress
     tier: frontend
@@ -56,8 +56,9 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:4.8-apache
+      - image: my_wordpress
         name: wordpress
+        imagePullPolicy: Never
         env:
         - name: DB_HOST
           value: mysql
