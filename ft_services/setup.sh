@@ -20,6 +20,7 @@ docker build -t mynginx srcs/nginx/
 docker build -t my_mysql srcs/mysql/  
 docker build -t my_phpmyadmin srcs/phpmyadmin/  
 docker build -t my_wordpress srcs/wordpress/  
+docker build -t my_grafana srcs/grafana/  
 
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 kubectl apply -f srcs/nginx/nginx.yaml

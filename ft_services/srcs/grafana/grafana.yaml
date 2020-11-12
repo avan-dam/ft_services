@@ -50,8 +50,9 @@ spec:
         app: grafana
     spec:
       containers:
-      - name: grafana
-        image: grafana/grafana:latest
+      - image: my_grafana
+        name: grafana
+        imagePullPolicy: Never
         volumeMounts:
           - mountPath: /data/grafana
             name: grafanaa
