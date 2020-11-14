@@ -272,15 +272,35 @@ metadata:
   name: telegraf-secrets
 type: Opaque
 stringData:
-  INFLUXDB_DB: influxdb-database
+  INFLUXDB_DB: influxdb
   INFLUXDB_URL: http://influxdb:8086
   INFLUXDB_USER: admin
   INFLUXDB_USER_PASSWORD: amber
+  INFLUXDB_ADMIN_USER: admin
+  INFLUXDB_ADMIN_PASSWORD: amber
+  INFLUX_SKIP_DATABASE_CREATION: "false"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # annotations:
+  #   metallb.universe.tf/allow-shared-ip: shared
+  # creationTimestamp: null
+  labels:
+    app: telegraf
+  name: telegraf
+spec:
+  ports:
+  - port: 4999
+    protocol: TCP
+    name: http
+  selector:
+    app: telegraf-app
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: telegraf-deployment
+  name: telegraf
 spec:
   selector:
     matchLabels:

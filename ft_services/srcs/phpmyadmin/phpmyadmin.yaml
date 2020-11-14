@@ -39,25 +39,8 @@ spec:
               value: mysql
             - name: PMA_PORT
               value: "3306"
-            # - name: DB_NAME
-            #   value: wordpress
-            # - name: DB_USER
-            #   value: mysql
-            # - name: DB_PASS
-            #   value: password
-            # - name: DB_HOST
-            #   value: mysql
-            # - name: DB_USER
-            #   value: rooty
-            # - name: DB_PASS
-            #   value: password
-            # - name: MYSQL_ROOT_PASSWORD
-            #   value: admin
-        # - name: DB_HOST
-        #   value: mysql
-        # - name: DB_NAME
-        #   value: wordpress
-        # - name: DB_USER
-        #   value: root
-        # - name: DB_PASS
-        #   value: password
+
+
+
+        # username: mysql
+        # password: password

@@ -170,26 +170,30 @@ stringData:
   # INFLUXDB_CONFIG_PATH: /etc/influxdb/influxdb.conf  
   INFLUXDB_ADMIN_USER: admin  
   INFLUXDB_ADMIN_PASSWORD: amber  
-  INFLUXDB_DATABASE: influxdb-database
+  INFLUXDB_DATABASE: influxdb
   INFLUXDB_USERNAME: admin  
   INFLUXDB_PASSWORD: amber
   INFLUXDB_URL: http://influxdb:8086
+  INFLUXDB_CONFIG_PATH: /etc/influxdb/influxdb.conf  
 ---
 apiVersion: v1  
 kind: Service  
-metadata:  
-  # name: influxdb-service  
+metadata:
   name: influxdb
-spec:  
-  selector:  
+  labels:
     app: influxdb
+spec:
   ports:
-    - port: 8086
+  - port: 8086
+    protocol: TCP
+    name: http
+  selector:
+    app: influxdb
 ---
 apiVersion: v1  
 kind: PersistentVolumeClaim  
 metadata:  
-  name: influxdb-data  
+  name: influx-pv-claim 
 spec:  
   accessModes:  
   - ReadWriteOnce  
@@ -218,25 +222,20 @@ spec:
           ports:
             - containerPort: 8086
           volumeMounts:
-            - mountPath: /var/lib/influxdb
-              name: influxdb-data
-            - mountPath: /data/influxdb
-              name: influxdbb
+            - name: influx-persistent-storage
+              mountPath: /var/lib/influxdb
             # - mountPath: /etc/influxdb/influxdb.conf
             #   name: influxdb-config
             #   subPath: influxdb.conf
-              readOnly: true
+              # readOnly: true
           envFrom:
             - secretRef:
                 name: influxdb-secrets
       volumes:
         # - /data/influxdb:/var/lib/influxdb
-        - name: influxdb-data
+        - name: influx-persistent-storage
           persistentVolumeClaim:
-            claimName: influxdb-data
+            claimName: influx-pv-claim
         # - name: influxdb-config
         #   configMap:
         #     name: influxdb-config
-        - name: influxdbb
-          hostPath:
-            path: /var/lib/influxdb

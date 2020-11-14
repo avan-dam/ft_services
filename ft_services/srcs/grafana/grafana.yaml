@@ -17,7 +17,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 3000
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
   selector:
     app: grafana
 ---
@@ -53,15 +55,12 @@ spec:
       - image: my_grafana
         name: grafana
         imagePullPolicy: Never
-        volumeMounts:
-          - mountPath: /data/grafana
-            name: grafanaa
         ports:
         - name: grafana
           containerPort: 3000
         env:
-          - name: GF_INSTALL_PLUGINS
-            value: grafana-piechart-panel, blackmirror1-singlestat-math-panel
+          # - name: GF_INSTALL_PLUGINS
+          #   value: grafana-piechart-panel, blackmirror1-singlestat-math-panel
           - name: GF_SECURITY_ADMIN_USER
             value: admin
           - name: GF_SECURITY_ADMIN_PASSWORD
@@ -69,24 +68,66 @@ spec:
               secretKeyRef:
                 name: grafana-secret
                 key: password
-        # volumeMounts:
-        #   - mountPath: /var/lib/grafana/dashboards/mysql-dashboard.json
-        #     name: grafana-config-volume
-        #     readOnly: true
-        #     subPath: mysql-dashboard.json
+        volumeMounts:
+        - name: provisioning
+          mountPath: /usr/share/grafana/conf/provisioning
+        # - name: grafanaa
+          # mountPath: /data/grafana
       volumes:
-      # - /data/grafana:/var/lib/grafana
-      - name: grafana-volume
-        hostPath:
-          path: /grafana
-      - name: grafanaa
-        hostPath:
-          path: /var/lib/grafana
-      # - name: grafana-config-volume
-      #   configMap:
-      #     name: grafana-config
+      # - name: grafana-volume
+      #   hostPath:
+      #     path: /grafana
+      # - name: grafanaa
+        # hostPath:
+          # path: /var/lib/grafana
+      - name: provisioning
+        configMap:
+          name: grafana-config
+          items:
+          - key: dashboards.yml
+            path: dashboards/dashboards.yml
+          - key: datasources.yml
+            path: datasources/datasources.yml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+data:
+  datasources.yml: |
+    apiVersion: 1
+    datasources:
+    - name: InfluxDB
+      type: influxdb
+      access: proxy
+      database: telegraf
+      isDefault: true
+      user: admin
+      password: amber
+      url: http://influxdb:8086
+  dashboards.yml: |
+    apiVersion: 1
+    providers:
+    - name: 'influxdb'
+      orgId: 1
+      folder: ''
+      folderUid: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      updateIntervalSeconds: 10
+      allowUiUpdates: true
+      options:
+        path: /usr/share/grafana/public/dashboards
+# volumes:
+      # - name: grafana-volume
+      #   hostPath:
+      #     path: /grafana
+      # - name: grafanaa
+      #   hostPath:
+      #     path: /var/lib/grafana
 # to load up in grafana 
 # HTTP URL : http://influxdb:8086
-# DATABASE : influxdb-database
+# DATABASE : influxdb
 # USER : admin 
 # PASSWORD : amber

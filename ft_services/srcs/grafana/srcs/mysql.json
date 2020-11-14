@@ -15,7 +15,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 2,
+    "id": 3,
     "links": [],
     "panels": [
       {
@@ -56,7 +56,7 @@
           "alertThreshold": true
         },
         "percentage": false,
-        "pluginVersion": "7.3.0",
+        "pluginVersion": "7.3.1",
         "pointradius": 2,
         "points": false,
         "renderer": "flot",
@@ -112,7 +112,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Panel Title",
+        "title": "Mysql",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -157,12 +157,12 @@
       "list": []
     },
     "time": {
-      "from": "now-6h",
+      "from": "now-15m",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
-    "title": "mysql",
-    "uid": "mX9uRCpGk",
+    "title": "Mysql",
+    "uid": "g0o5vkTMk",
     "version": 1
   }
