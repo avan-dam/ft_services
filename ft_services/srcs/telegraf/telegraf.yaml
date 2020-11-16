@@ -283,9 +283,10 @@ stringData:
 apiVersion: v1
 kind: Service
 metadata:
-  # annotations:
-  #   metallb.universe.tf/allow-shared-ip: shared
   # creationTimestamp: null
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+  creationTimestamp: null
   labels:
     app: telegraf
   name: telegraf

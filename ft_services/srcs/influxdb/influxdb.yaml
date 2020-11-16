@@ -17,6 +17,7 @@ stringData:
 apiVersion: v1  
 kind: Service  
 metadata:
+  creationTimestamp: null
   name: influxdb
   labels:
     app: influxdb

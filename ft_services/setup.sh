@@ -24,6 +24,7 @@ docker build -t my_wordpress srcs/wordpress/
 docker build -t my_grafana srcs/grafana/  
 docker build -t my_influxdb srcs/influxdb/  
 docker build -t my_telegraf srcs/telegraf/  
+docker build -t my_ftps srcs/ftps/  
 
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 kubectl apply -f srcs/nginx/nginx.yaml
@@ -41,5 +42,4 @@ kubectl apply -f srcs/influxdb/influxdb.yaml
 # AND telegraf
 kubectl apply -f srcs/telegraf/telegraf.yaml 
 # and with FTPS
-# kubectl apply -f srcs/ftps/vsftpd.conf
-# kubectl apply -f srcs/ftps/ftps.yaml
+kubectl apply -f srcs/ftps/ftps.yaml
