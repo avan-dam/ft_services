@@ -15,7 +15,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 11,
+    "id": 10,
     "links": [],
     "panels": [
       {
@@ -103,7 +103,7 @@
               {
                 "key": "io.kubernetes.container.name",
                 "operator": "=",
-                "value": "grafana"
+                "value": "ftps"
               }
             ]
           }
@@ -112,7 +112,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Grafana",
+        "title": "FTPS",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -162,7 +162,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Grafana",
-    "uid": "MTAVHAoMk",
+    "title": "FTPS",
+    "uid": "Evf9nATMk",
     "version": 1
   }

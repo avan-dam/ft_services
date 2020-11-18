@@ -16,10 +16,13 @@ spec:
       targetPort: 80
     - name: https
       port: 443
+      targetPort: 443
+    - name: ssh
+      port: 22
+      targetPort: 22
   # externalTrafficPolicy: Cluster
   # loadBalancerIP: 192.168.99.201
   type: LoadBalancer
-
 ---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
@@ -32,6 +35,7 @@ spec:
   replicas: 1
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: nginx
     spec:
@@ -42,6 +46,7 @@ spec:
         ports:
         - containerPort: 80
         - containerPort: 443
+        - containerPort: 22
 
 
 # apiVersion: apps/v1
