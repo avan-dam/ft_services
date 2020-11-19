@@ -31,4 +31,4 @@ RUN		chmod +x tmp/startup.sh
 # start it all
 CMD     sh /tmp/startup.sh
 
-# check ssh : §ssh user@192.168.99.201   then password
+# check ssh : § ssh user@192.168.99.201   then password:password

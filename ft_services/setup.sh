@@ -28,7 +28,8 @@ docker build -t my_ftps srcs/ftps/
 
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 kubectl apply -f srcs/nginx/nginx.yaml
-
+# and with FTPS
+kubectl apply -f srcs/ftps/ftps.yaml
 # Create a Deployment based on the of WORDPRESS based on generic YAML file: (https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
 kubectl apply -f srcs/mysql/mysql.yaml
 # and with SQL
@@ -37,9 +38,8 @@ kubectl apply -f srcs/wordpress/wordpress.yaml
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 # AND GRAFANA
 kubectl apply -f srcs/grafana/grafana.yaml   
-# AND influxdb
-kubectl apply -f srcs/influxdb/influxdb.yaml 
 # AND telegraf
 kubectl apply -f srcs/telegraf/telegraf.yaml 
-# and with FTPS
-kubectl apply -f srcs/ftps/ftps.yaml
+# AND influxdb
+kubectl apply -f srcs/influxdb/influxdb.yaml 
+

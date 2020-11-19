@@ -22,8 +22,8 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f srcs/metallb.yaml
 
 eval $(minikube docker-env)
-docker build -t mynginx srcs/nginx/  
+docker build -t my_ftps srcs/ftps/  
 
 # Create a Deployment based on the of NGINX based on generic YAML file: (https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
-kubectl apply -f srcs/nginx/nginx.yaml
+kubectl apply -f srcs/ftps/ftps.yaml
 
