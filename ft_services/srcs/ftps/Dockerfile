@@ -12,6 +12,6 @@ RUN     chmod 600 /etc/ssl/*
 # ENV     FTP_USER=ambo
 # ENV     FTP_PASS=pass
 
-EXPOSE  20 21 30000
+EXPOSE  20 21 2000-2010
 
-CMD     vsftpd /etc/vsftpd/vsftpd.conf
+CMD     exec /usr/sbin/vsftpd -opasv_min_port=30020 -opasv_max_port=30020 -opasv_address=192.168.99.201 /etc/vsftpd/vsftpd.conf
