@@ -70,11 +70,8 @@ spec:
       port: 21
       targetPort: 21
     - name: pasv-port
-      port: 2000
-      targetPort: 2000
-    - name: pasv-port-again
-      port: 2010
-      targetPort: 2010
+      port: 30000
+      targetPort: 30000
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -116,8 +113,7 @@ spec:
         ports:
         - containerPort: 20
         - containerPort: 21
-        - containerPort: 2000
-        - containerPort: 2010
+        - containerPort: 30000
         volumeMounts:
         - name: ftps
           mountPath: /ftp
