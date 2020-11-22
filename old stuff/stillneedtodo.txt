@@ -1,3 +1,0 @@
-WEDNSDAY/THURSDAY
-    • All your containers must restart in case of a crash or stop of one of its component parts.
-    • NGINX This container will allow access to/phpmyadmin with a reverse proxy to IP:PMAPORT.

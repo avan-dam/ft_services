@@ -56,14 +56,14 @@ spec:
         name: wordpress
         imagePullPolicy: Never
         env:
-        - name: MYSQL_DB
-          value: wordpress
-        - name: MYSQL_USER
-          value: mysql
-        - name: MYSQL_PASS
-          value: password
-        - name: MYSQL_HOME
-          value: "/etc/"
+        # - name: MYSQL_DB
+        #   value: wordpress
+        # - name: MYSQL_USER
+        #   value: mysql
+        # - name: MYSQL_PASS
+        #   value: password
+        # - name: MYSQL_HOME
+        #   value: "/etc/"
         - name: WORDPRESS_DB_HOST
           value: mysql
         ports:

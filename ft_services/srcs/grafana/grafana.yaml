@@ -13,7 +13,6 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
-  # creationTimestamp: null
   name: grafana
   labels:
     app: grafana

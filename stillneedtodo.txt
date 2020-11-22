@@ -1,0 +1,4 @@
+    • All your containers must restart in case of a crash or stop of one of its component parts. 
+        - Wordpress phpmyadmin and nginx with the bash scripts solves this
+    • NGINX This container will allow access to/phpmyadmin with a reverse proxy to IP:PMAPORT.
+https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
