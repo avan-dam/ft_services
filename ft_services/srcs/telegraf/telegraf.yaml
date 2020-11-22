@@ -285,8 +285,8 @@ kind: Service
 metadata:
   # creationTimestamp: null
   annotations:
-    metallb.universe.tf/allow-shared-ip: shared
-  creationTimestamp: null
+  #   metallb.universe.tf/allow-shared-ip: shared
+  # creationTimestamp: null
   labels:
     app: telegraf
   name: telegraf

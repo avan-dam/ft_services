@@ -1,23 +1,24 @@
-apiVersion: v1  
-kind: Secret  
-metadata:  
-  name: influxdb-secrets  
-type: Opaque  
-stringData:  
-  # INFLUXDB_ADMIN_USER: admin  
-  # INFLUXDB_ADMIN_PASSWORD: amber  
-  # INFLUXDB_DB: telegraf
-  # INFLUXDB_USERNAME: admin  
-  # INFLUXDB_PASSWORD: amber
-  # INFLUXDB_USER: admin
-  # INFLUXDB_USER_PASSWORD: amber
-  # INFLUXDB_URL: http://influxdb:8086
-  # INFLUXDB_CONFIG_PATH: /etc/influxdb/influxdb.conf  
----
+# apiVersion: v1  
+# kind: Secret  
+# metadata:  
+#   name: influxdb-secrets  
+# type: Opaque  
+# stringData:  
+#   # INFLUXDB_ADMIN_USER: admin  
+#   # INFLUXDB_ADMIN_PASSWORD: amber  
+#   # INFLUXDB_DB: telegraf
+#   # INFLUXDB_USERNAME: admin  
+#   # INFLUXDB_PASSWORD: amber
+#   # INFLUXDB_USER: admin
+#   # INFLUXDB_USER_PASSWORD: amber
+#   # INFLUXDB_URL: http://influxdb:8086
+#   # INFLUXDB_CONFIG_PATH: /etc/influxdb/influxdb.conf  
+# ---
 apiVersion: v1  
 kind: Service  
 metadata:
-  creationTimestamp: null
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
   name: influxdb
   labels:
     app: influxdb

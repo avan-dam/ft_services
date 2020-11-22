@@ -12,14 +12,12 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    metallb.universe.tf/allow-shared-ip: shared-ip
-  creationTimestamp: null
+    metallb.universe.tf/allow-shared-ip: shared
+  # creationTimestamp: null
   name: grafana
   labels:
     app: grafana
 spec:
-  # externalTrafficPolicy: Cluster
-  # loadBalancerIP: 192.168.99.201
   type: LoadBalancer
   ports:
   - port: 3000
@@ -28,19 +26,19 @@ spec:
   selector:
     app: grafana
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: grafana-storage
-  labels:
-    app: grafana
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
----
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: grafana-storage
+#   labels:
+#     app: grafana
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 20Gi
+# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -64,8 +62,6 @@ spec:
         - name: grafana
           containerPort: 3000
         env:
-          # - name: GF_INSTALL_PLUGINS
-          #   value: grafana-piechart-panel, blackmirror1-singlestat-math-panel
           - name: GF_SECURITY_ADMIN_USER
             value: admin
           - name: GF_SECURITY_ADMIN_PASSWORD
@@ -76,15 +72,7 @@ spec:
         volumeMounts:
         - name: provisioning
           mountPath: /usr/share/grafana/conf/provisioning
-        # - name: grafanaa
-          # mountPath: /data/grafana
       volumes:
-      # - name: grafana-volume
-      #   hostPath:
-      #     path: /grafana
-      # - name: grafanaa
-        # hostPath:
-          # path: /var/lib/grafana
       - name: provisioning
         configMap:
           name: grafana-config
@@ -124,13 +112,6 @@ data:
       allowUiUpdates: true
       options:
         path: /usr/share/grafana/public/dashboards
-# volumes:
-      # - name: grafana-volume
-      #   hostPath:
-      #     path: /grafana
-      # - name: grafanaa
-      #   hostPath:
-      #     path: /var/lib/grafana
 # to load up in grafana 
 # HTTP URL : http://influxdb:8086
 # DATABASE : influxdb

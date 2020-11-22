@@ -26,16 +26,19 @@ RUN     mv wp-cli.phar /usr/bin/wp && \
 # RUN     rm latest.tar.gz
 # RUN     chown -R www:www /www/*
 
+# config wordpress
 COPY    srcs/wp-config.php tmp/wp-config.php
+# permissions and change dir
 RUN     chmod +x tmp/wp-config.php
 RUN     cp tmp/wp-config.php /www/wp-config.php
+# add in startup file and install file for wp and give it permissions
 COPY    srcs/startup.sh .
 COPY    srcs/wpinstall.sh /tmp/wpinstall.sh
 RUN     chmod +x ./startup.sh /tmp/wpinstall.sh /www/wp-config.php
+# cleanup
 RUN     rm tmp/wp-config.php
 
+# expose correct port
 EXPOSE  5050
-
+# startup
 CMD     sh ./startup.sh
-
-# CMD     ["php-fpm7", "/bin/sh", "-c", "/usr/sbin/php-fpm7; exec nginx -g 'daemon off;';"]

@@ -1,9 +1,60 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   annotations:
+#     metallb.universe.tf/allow-shared-ip: shared
+#   name: ftps-service
+# spec:
+#   selector:
+#     app: ftps
+#   ports:
+#     - name: ftp-data
+#       port: 20
+#       targetPort: 20
+#     - name: ftp-container
+#       port: 21
+#       targetPort: 21
+#     - name: pasv-port
+#       port: 30000
+#       targetPort: 30000
+#   type: LoadBalancer
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   creationTimestamp: null
+#   labels:
+#     app: ftps
+#   name: ftps
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: ftps
+#   strategy: {}
+#   template:
+#     metadata:
+#       creationTimestamp: null
+#       labels:
+#         app: ftps
+#     spec:
+#       containers:
+#       - image: myftps
+#         name: ftps
+#         ports:
+#         - containerPort: 21
+#         - containerPort: 20
+#         - containerPort: 30000
+#         imagePullPolicy: Never
+#         resources: {}
+# status: {}
+
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    metallb.universe.tf/allow-shared-ip: shared-ip
-  creationTimestamp: null
+    metallb.universe.tf/allow-shared-ip: shared
+  # creationTimestamp: null
   name: nginx
   labels:
     run: nginx
@@ -35,7 +86,7 @@ spec:
   replicas: 1
   template:
     metadata:
-      creationTimestamp: null
+      # creationTimestamp: null
       labels:
         app: nginx
     spec:
@@ -49,24 +100,24 @@ spec:
         - containerPort: 22
 
 
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: nginx
-# spec:
-#   selector:
-#     matchLabels:
-#       run: nginx
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         run: nginx
-#     spec:
-#       containers:
-#       - name: nginx
-#         image: mynginx
-#         imagePullPolicy: Never
-#         ports:
-#         - containerPort: 80
-#         - containerPort: 443
+# # apiVersion: apps/v1
+# # kind: Deployment
+# # metadata:
+# #   name: nginx
+# # spec:
+# #   selector:
+# #     matchLabels:
+# #       run: nginx
+# #   replicas: 1
+# #   template:
+# #     metadata:
+# #       labels:
+# #         run: nginx
+# #     spec:
+# #       containers:
+# #       - name: nginx
+# #         image: mynginx
+# #         imagePullPolicy: Never
+# #         ports:
+# #         - containerPort: 80
+# #         - containerPort: 443

@@ -1,96 +1,41 @@
-# # CHANGE BACK
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   annotations:
-#     metallb.universe.tf/allow-shared-ip: shared
-#   name: ftps
-# spec:
-#   selector:
-#     app: ftps
-#   ports:
-#     - name: ftp-data
-#       port: 20
-#       targetPort: 20
-#     - name: ftp-container
-#       port: 21
-#       targetPort: 21
-#     - name: pasv-port
-#       port: 30000
-#       targetPort: 30000
-#   type: LoadBalancer
-# ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   creationTimestamp: null
-#   labels:
-#     app: ftps
-#   name: ftps
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: ftps
-#   strategy: {}
-#   template:
-#     metadata:
-#       creationTimestamp: null
-#       labels:
-#         app: ftps
-#     spec:
-#       containers:
-#       - image: my_ftps
-#         name: ftps
-#         ports:
-#         - containerPort: 21
-#         - containerPort: 20
-#         - containerPort: 30000
-#         imagePullPolicy: Never
-#         resources: {}
-# status: {}
-
 apiVersion: v1
 kind: Service
 metadata:
-  # creationTimestamp: null
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
   name: ftps
-  labels:
-    app: ftps
 spec:
   selector:
     app: ftps
-  ports:
-    - name: ftp-data
-      port: 20
-      targetPort: 20
-    - name: ftp-container
-      port: 21
-      targetPort: 21
-    - name: pasv-port
-      port: 30000
-      targetPort: 30000
   type: LoadBalancer
+  ports:
+  - name: ftp-data
+    port: 20
+    targetPort: 20 
+  - name: ftp-container
+    port: 21
+    targetPort: 21
+  - name: ftp-port
+    port: 30000
+    targetPort: 30000
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ftps
-  labels:
-    app: ftps
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
----
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: ftps
+#   labels:
+#     app: ftps
+# spec:
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 2Gi
+# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  # creationTimestamp: null
+  creationTimestamp: null
   name: ftps
   labels:
     app: ftps
@@ -98,11 +43,8 @@ spec:
   selector:
     matchLabels:
       app: ftps
-  strategy:
-    type: Recreate
   template:
     metadata:
-      # creationTimestamp: null
       labels:
         app: ftps
     spec:
@@ -114,80 +56,10 @@ spec:
         - containerPort: 20
         - containerPort: 21
         - containerPort: 30000
-        volumeMounts:
-        - name: ftps
-          mountPath: /ftp
-      volumes:
-      - name: ftps
-        persistentVolumeClaim:
-          claimName: ftps
-
-
-
-
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   annotations:
-#     metallb.universe.tf/allow-shared-ip: shared
-#   creationTimestamp: null
-#   name: ftps
-# spec:
-#   selector:
-#     app: ftps
-#   type: LoadBalancer
-#   ports:
-#   - name: ftp-data
-#     port: 20
-#     targetPort: 20 
-#   - name: ftp-container
-#     port: 21
-#     targetPort: 21
-#   - name: ftp-port
-#     port: 30000
-#     targetPort: 30000
-# ---
-# # apiVersion: v1
-# # kind: PersistentVolumeClaim
-# # metadata:
-# #   name: ftps
-# #   labels:
-# #     app: ftps
-# # spec:
-# #   accessModes:
-# #   - ReadWriteOnce
-# #   resources:
-# #     requests:
-# #       storage: 2Gi
-# # ---
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   creationTimestamp: null
-#   name: ftps
-#   labels:
-#     app: ftps
-# spec:
-#   selector:
-#     matchLabels:
-#       app: ftps
-#   template:
-#     metadata:
-#       labels:
-#         app: ftps
-#     spec:
-#       containers:
-#       - image: my_ftps
-#         name: ftps
-#         imagePullPolicy: Never
-#         ports:
-#         - containerPort: 20
-#         - containerPort: 21
-#         - containerPort: 30000
-#       #   volumeMounts:
-#       #   - name: ftps
-#       #     mountPath: /ftp
-#       # volumes:
-#       # - name: ftps
-#       #   persistentVolumeClaim:
-#       #     claimName: ftps
+      #   volumeMounts:
+      #   - name: ftps
+      #     mountPath: /ftp
+      # volumes:
+      # - name: ftps
+      #   persistentVolumeClaim:
+      #     claimName: ftps

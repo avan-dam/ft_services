@@ -2,6 +2,7 @@ FROM	alpine:latest
 # installing and setting up nginx
 RUN		apk --update add --no-cache openssh && \
     	apk add nginx && \
+		apk add openssl && \
 		adduser -D -g 'www' www && \
 		mkdir /www && \
 		chown -R www:www /var/lib/nginx && \
@@ -19,8 +20,10 @@ RUN		rm  -rf /tmp/* /var/cache/apk/* && \
 		/usr/bin/ssh-keygen -A 
 RUN 	ssh-keygen -t rsa -b 4096 -f  /etc/ssh/ssh_host_key
 # certificates
-COPY	./srcs/localhost.crt etc/ssl/certs/
-COPY	./srcs/localhost.key etc/ssl/certs/
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj '/C=NL/ST=Noord-Holland/O=Codam/CN=amber' -keyout etc/ssl/certs/localhost.key -out etc/ssl/certs/localhost.crt
+
+# COPY	./srcs/localhost.crt etc/ssl/certs/
+# COPY	./srcs/localhost.key etc/ssl/certs/
 # start web server
 RUN		mkdir -p /run/nginx 
 # expose correct ports
