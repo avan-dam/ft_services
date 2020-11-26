@@ -1,4 +1,5 @@
-FROM    alpine
+# FROM    alpine
+FROM    alpine:latest
 
 # add mysql 
 RUN     apk add mysql mysql-client

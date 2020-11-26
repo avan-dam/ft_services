@@ -11,6 +11,4 @@ echo "GRANT ALL ON *.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS' WITH G
 echo "GRANT ALL ON *.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS' WITH GRANT OPTION;" >> /tmp/sql
 echo "FLUSH PRIVILEGES;" >> /tmp/sql
 
-# cat /tmp/sql
-
 /usr/bin/mysqld --console --init_file=/tmp/sql

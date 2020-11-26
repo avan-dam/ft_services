@@ -4,4 +4,6 @@ minikube stop
 
 minikube delete
 
+docker system prune -a -f
+
 bash setup.sh

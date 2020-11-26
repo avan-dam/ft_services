@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  * phpMyAdmin sample configuration, you can use it as base for
@@ -10,6 +12,7 @@
  * @package PhpMyAdmin
  */
 /**
+
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
@@ -17,21 +20,31 @@ $cfg['blowfish_secret'] = 'dhYz-sPRuG.[a5tF;UG}1-VEeW:i;kAu'; /* YOU MUST FILL I
 /**
  * Servers configuration
  */
-$i = 0;
-$i++;
+$i = 1;
+
+/**
+ * First server
+ */
+// $i++;
 /* Authentication type */
-$cfg['Servers'][$i]['auth_type'] = 'cookie';
-$cfg['tempDir'] = 'tmp';
+$cfg['Servers'][$i]['auth_type'] = 'config';
+$cfg['tempDir'] = '/tmp';
 /* Server parameters */
 $cfg['Servers'][$i]['user'] = 'mysql';
 $cfg['Servers'][$i]['password'] = 'password';
 $cfg['Servers'][$i]['port'] = '3306';
 $cfg['Servers'][$i]['host'] = 'mysql';
+// $cfg['Servers'][$i]['connect_type'] = 'tcp';
+
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = true;
 /**
  * phpMyAdmin configuration storage settings.
  */
+// $cfg['PmaAbsoluteUri'] = '192.168.99.201:5000';
+$cfg['PmaAbsoluteUri'] = '/phpmyadmin';
+// $cfg['MemoryLimit'] = '-1';
+
 /* User used to manipulate with storage */
 // $cfg['Servers'][$i]['controlhost'] = '';
 // $cfg['Servers'][$i]['controlport'] = '';
@@ -102,7 +115,7 @@ $cfg['SaveDir'] = '';
  * uncomment the desired line:
  * default = 'en'
  */
-$cfg['DefaultLang'] = 'en';
+// $cfg['DefaultLang'] = 'en';
 //$cfg['DefaultLang'] = 'de';
 /**
  * How many columns should be used for table display of a database?
