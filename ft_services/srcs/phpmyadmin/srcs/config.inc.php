@@ -43,7 +43,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = true;
  */
 // $cfg['PmaAbsoluteUri'] = '192.168.99.201:5000';
 $cfg['PmaAbsoluteUri'] = '/phpmyadmin';
-// $cfg['MemoryLimit'] = '-1';
+$cfg['MemoryLimit'] = '-1';
 
 /* User used to manipulate with storage */
 // $cfg['Servers'][$i]['controlhost'] = '';

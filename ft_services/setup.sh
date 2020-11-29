@@ -23,7 +23,7 @@ eval $(minikube docker-env)
 docker build -t mynginx srcs/nginx/  
 docker build -t my_mysql srcs/mysql/  
 docker build -t my_phpmyadmin srcs/phpmyadmin/  
-# docker build -t my_wordpress srcs/wordpress/  
+docker build -t my_wordpress srcs/wordpress/  
 # docker build -t my_grafana srcs/grafana/  
 # docker build -t my_influxdb srcs/influxdb/  
 # docker build -t my_telegraf srcs/telegraf/  
@@ -32,7 +32,7 @@ docker build -t my_phpmyadmin srcs/phpmyadmin/
 # kubectl apply -f srcs/ftps/ftps.yaml
 kubectl apply -f srcs/nginx/nginx.yaml
 kubectl apply -f srcs/mysql/mysql.yaml
-# kubectl apply -f srcs/wordpress/wordpress.yaml
+kubectl apply -f srcs/wordpress/wordpress.yaml
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 # kubectl apply -f srcs/grafana/grafana.yaml   
 # kubectl apply -f srcs/telegraf/telegraf.yaml 
