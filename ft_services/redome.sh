@@ -11,9 +11,7 @@
 
 # kubectl delete pods --all
 
-# docker rmi mynginx
-# docker rmi myphp
-# docker rmi mysql
+# docker rmi my_nginx
 docker system prune -a -f
 # kubectl delete deployment mysql
 # kubectl delete service mysql

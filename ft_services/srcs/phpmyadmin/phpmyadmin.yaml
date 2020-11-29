@@ -3,7 +3,6 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
-  # creationTimestamp: null
   name: phpmyadmin
   labels:
     app: phpmyadmin
@@ -14,11 +13,9 @@ spec:
       targetPort: 5000
   selector:
     app: phpmyadmin
-  # externalTrafficPolicy: Cluster
-  # loadBalancerIP: 192.168.99.201
   type: LoadBalancer
 ---
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phpmyadmin
@@ -44,8 +41,3 @@ spec:
               value: mysql
             - name: PMA_PORT
               value: "3306"
-
-
-
-        # username: mysql
-        # password: password

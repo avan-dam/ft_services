@@ -19,19 +19,6 @@ spec:
     port: 30000
     targetPort: 30000
 ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: ftps
-#   labels:
-#     app: ftps
-# spec:
-#   accessModes:
-#   - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 2Gi
-# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -56,10 +43,3 @@ spec:
         - containerPort: 20
         - containerPort: 21
         - containerPort: 30000
-      #   volumeMounts:
-      #   - name: ftps
-      #     mountPath: /ftp
-      # volumes:
-      # - name: ftps
-      #   persistentVolumeClaim:
-      #     claimName: ftps

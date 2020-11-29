@@ -1,9 +1,8 @@
 #! bin/bash
 
 php-fpm7
-# php
 nginx
-
+# if either process dies then restart
 while true; do
 	sleep 10
 	ps | grep nginx | grep master

@@ -1,6 +1,6 @@
 # !/bin/bash
 
-# php-fpm7
+# wait for mysql to start 
 
 while :
 do
@@ -12,10 +12,13 @@ do
     sleep 10
 done
 echo "Connection with Mysql established."
+# once mysql started run php 
 php-fpm7
+# install wp
 su -c "/tmp/wpinstall.sh" - www
+# then run nginx
 nginx
-
+# make sure if nginx of php quit it restarts
 while true; do
 	sleep 10s
 	ps | grep nginx | grep master

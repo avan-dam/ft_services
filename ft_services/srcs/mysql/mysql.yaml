@@ -1,18 +1,16 @@
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   labels:
-#     app: mysql
-#   name: mysql-secret
-# type: Opaque
-# stringData:
-#   MYSQL_DB_NAME: wordpress
-#   MYSQL_USER: rooty
-#   MYSQL_PASSWORD: password
-#   password: admin
-#   MYSQL_DB_HOST: mysql-svc
-#   MYSQL_HOME: /etc/
-# ---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: mysql
+  name: mysql-secret
+type: Opaque
+stringData:
+  DB_NAME: wordpress
+  DB_USER: mysql
+  DB_PASS: password
+  MYSQL_HOME: "/etc/"
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -64,25 +62,10 @@ spec:
       containers:
       - image: my_mysql
         name: mysql
-        # or the otherway around aboce
         imagePullPolicy: Never
-        # envFrom:
-        #   - secretRef:
-        #       name: mysql-secret
-        env:
-        # - name: MYSQL_ROOT_PASSWORD
-        #   value: admin
-        - name: DB_NAME
-          value: wordpress
-        - name: DB_USER
-          value: mysql
-        - name: DB_PASS
-          value: password
-        - name: MYSQL_HOME
-          value: "/etc/"
-        # ports:
-        # - containerPort: 3306
-        #   name: mysql
+        envFrom:
+          - secretRef:
+              name: mysql-secret
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql

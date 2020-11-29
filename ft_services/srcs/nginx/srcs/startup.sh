@@ -2,7 +2,7 @@
 
 /usr/sbin/sshd
 nginx
-
+# loop to check if services present if not then restart
 while true; do
 	sleep 10s
 	ps | grep nginx | grep master

@@ -25,19 +25,6 @@ spec:
   selector:
     app: grafana
 ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: grafana-storage
-#   labels:
-#     app: grafana
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   resources:
-#     requests:
-#       storage: 20Gi
-# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -111,8 +98,5 @@ data:
       allowUiUpdates: true
       options:
         path: /usr/share/grafana/public/dashboards
-# to load up in grafana 
-# HTTP URL : http://influxdb:8086
-# DATABASE : influxdb
-# USER : admin 
-# PASSWORD : amber
+# to log in username:admin password:amber
+# to load up in grafana : HTTP URL:http://influxdb:8086 DATABASE:influxdb USER:admin PASSWORD:amber
