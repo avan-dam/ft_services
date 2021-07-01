@@ -1,4 +1,4 @@
-FROM	alpine:latest
+FROM    alpine:3.11
 
 # installing and setting up nginx
 RUN		apk --update add --no-cache openssh && \

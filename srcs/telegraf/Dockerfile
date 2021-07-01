@@ -1,4 +1,4 @@
-FROM    alpine:latest
+FROM    alpine:3.12
 
 # install necessary packages and repository to run telegraf
 RUN     apk update --no-cache && \

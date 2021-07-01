@@ -1,4 +1,4 @@
-FROM    alpine:latest
+FROM    alpine:3.12
 
 # add the necessary vsfpd and open ssl to be able to build ftps image
 RUN     apk --update --no-cache add vsftpd openssl vim

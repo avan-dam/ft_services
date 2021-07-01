@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM    alpine:3.12
 
 # Update the packagelist and install the additional packages
 RUN apk update --no-cache && \

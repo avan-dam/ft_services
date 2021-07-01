@@ -1,4 +1,4 @@
-FROM    alpine:latest
+FROM    alpine:3.12
 
 # add update and influxdb
 RUN     apk update --no-cache && \
