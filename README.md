@@ -43,4 +43,15 @@ Grafana, Wordpress, PhpMyAdmin and nginx’s kind must be "LoadBalancer". Influx
 and MySQL’s kind must be "ClusterIP". Other entries can be present, but none of them
 can be of kind "NodePort".
 
+**Usage:**
+```
+git clone https://github.com/avan-dam/ft_services.git
+cd ft_services 
+./setup.sh
+```
+**Testing:**
+To see for instance wordpress go to the following in browser
+```
+http://192.168.99.201:5050/
+```
 Succeeded with 100/100
