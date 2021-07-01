@@ -54,4 +54,9 @@ To see for instance wordpress go to the following in browser
 ```
 http://192.168.99.201:5050/
 ```
+or to see phpmyadmin go to
+```
+http://192.168.99.201:5000/
+```
+
 Succeeded with 100/100
